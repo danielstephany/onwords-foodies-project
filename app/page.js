@@ -3,6 +3,7 @@ import classes from "./page.module.css";
 import ImageSlideshow from "@/components/ImageSlideshow/ImageSlideshow"
 
 export default function Home() {
+  
   return (
     <>
       <header className={classes.header}>

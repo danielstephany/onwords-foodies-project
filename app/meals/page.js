@@ -1,10 +1,18 @@
+import { Suspense } from 'react'
 import classes from './page.module.css'
 import Link from 'next/link';
 import MealsGrid from '@/components/Meals'
 import {getMeals} from '@/lib/meals'
+import LoadingComp from './loadingComp';
+import { resolve } from 'styled-jsx/css';
+
+async function Meals(){
+    const meals = await getMeals();
+
+    return <MealsGrid meals={meals} />
+}
 
 export default function MealsPage() {
-    const meals = getMeals()
     return (
         <>
             <header className={classes.header}>
@@ -22,7 +30,9 @@ export default function MealsPage() {
                 </p>
             </header>
             <main className={classes.main}>
-                <MealsGrid meals={meals} />
+                <Suspense fallback={<LoadingComp />}>
+                    <Meals />
+                </Suspense>
             </main>
         </>
     );
