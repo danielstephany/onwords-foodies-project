@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 export default async function MealDetailsPage({params}) {
     const { mealSlug } = await (params);
-    const meal = getMeal(mealSlug)
+    const meal = await getMeal(mealSlug)
 
     if(!meal) {
         //reroute to the closest not fount page.
