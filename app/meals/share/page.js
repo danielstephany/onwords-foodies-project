@@ -1,12 +1,12 @@
 'use client'
 import classes from './page.module.css'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import ImagePicker from '@/components/ImagePicker'
 import { shareMeal } from '@/lib/actions'
 import FormSubmitButton from '@/components/FormSubmitButton'
 
 export default function ShareMealPage() {
-    const [formState, formAction] = useFormState(shareMeal, {message: null})
+    const [formState, formAction] = useActionState(shareMeal, {message: null})
 
     return (
         <>
