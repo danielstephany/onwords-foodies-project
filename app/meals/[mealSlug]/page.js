@@ -3,6 +3,20 @@ import classes from './page.module.css'
 import {getMeal} from "@/lib/meals"
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({params}){
+    const { mealSlug } = await (params);
+    const meal = await getMeal(mealSlug)
+
+    if(!meal){
+        notFound()
+    }
+
+    return {
+        title: meal.title,
+        description: meal.description
+    }
+}
+
 export default async function MealDetailsPage({params}) {
     const { mealSlug } = await (params);
     const meal = await getMeal(mealSlug)
@@ -18,7 +32,7 @@ export default async function MealDetailsPage({params}) {
         <>
             <header className={classes.header}>
                 <div className={classes.image}>
-                    <Image src={"https://daniel-stephany-onwards-foodies-starting-project.s3.us-east-1.amazonaws.com/burger.jpg" + meal.image} alt={meal.title} fill priority />
+                    <Image src={"https://daniel-stephany-onwards-foodies-starting-project.s3.us-east-1.amazonaws.com/" + meal.image} alt={meal.title} fill priority />
                 </div>
                 <div className={classes.headerText}>
                     <h1>{meal.title}</h1>
